@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "ChatGPT Manager",
+  "version": "1.0",
+  "description": "A sidebar extension to manage ChatGPT conversations.",
+  "permissions": [
+    "sidePanel"
+  ],
+  "side_panel": {
+    "default_path": "src/sidepanel/sidepanel.html"
+  },
+  "action": {
+    "default_title": "Open ChatGPT Manager"
+  },
+  "background": {
+    "service_worker": "src/js/background.js"
+  },
+  "icons": {
+    "16": "src/images/icon16.png",
+    "48": "src/images/icon48.png",
+    "128": "src/images/icon128.png"
+  }
+}
