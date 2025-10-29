@@ -1,5 +1,3 @@
-// src/sidepanel/createFolderPopup.js
-
 export function initializeCreateFolderPopup() {
   const popupContainer = document.querySelector('.popupContainer');
   const closeBtn = document.getElementById('closeBtn');
@@ -22,7 +20,7 @@ export function initializeCreateFolderPopup() {
   closeBtn.addEventListener('click', hidePopup);
   cancelBtn.addEventListener('click', hidePopup);
 
-  createBtn.addEventListener('click', () => {
+  createBtn.addEventListener('click', async () => {
     const folderName = folderNameInput.value;
     const folderDescription = folderDescriptionTextarea.value;
 
@@ -31,9 +29,25 @@ export function initializeCreateFolderPopup() {
       return;
     }
 
-    console.log('Creating folder:', { folderName, folderDescription });
-    // Here you would typically save the folder data
-    // For now, just hide the popup
+    if (folderDescription.split(' ').length > 20) {
+        alert('Description should not exceed 20 words.');
+        return;
+    }
+
+    const newFolder = {
+      id: Date.now().toString(),
+      name: folderName,
+      description: folderDescription,
+      chats: [],
+    };
+
+    const result = await chrome.storage.local.get('folders');
+    const folders = result.folders || [];
+    folders.push(newFolder);
+    await chrome.storage.local.set({ folders });
+
+    window.dispatchEvent(new CustomEvent('folderCreated'));
+
     hidePopup();
   });
 

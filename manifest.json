@@ -4,7 +4,8 @@
   "version": "1.0",
   "description": "A sidebar extension to manage ChatGPT conversations.",
   "permissions": [
-    "sidePanel"
+    "sidePanel",
+    "storage"
   ],
   "side_panel": {
     "default_path": "src/sidepanel/sidepanel.html"
